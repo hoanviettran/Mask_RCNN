@@ -199,7 +199,7 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=args.epochs,
                 layers='heads')
 
 
@@ -285,10 +285,10 @@ if __name__ == '__main__':
     # Parse command line arguments
     parser = argparse.ArgumentParser(
         description='Train Mask R-CNN to detect balloons.')
-    parser.add_argument("--command",
+    parser.add_argument("command",
                         metavar="<command>",
-                        help="'train' or 'splash'",
-                        default='train')
+                        help="'train' or 'splash'"
+                        )
     parser.add_argument('--dataset', required=True,
                         metavar="/path/to/balloon/dataset/",
                         help='Directory of the Balloon dataset')
@@ -307,6 +307,8 @@ if __name__ == '__main__':
     parser.add_argument('--video', required=False,
                         metavar="path or URL to video",
                         help='Video to apply the color splash effect on')
+    parser.add_argument('--epochs', required=True,
+                        metavar="num of epochs for training")
     args = parser.parse_args()
 
     # Validate arguments
