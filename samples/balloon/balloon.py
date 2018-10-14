@@ -307,7 +307,7 @@ if __name__ == '__main__':
     parser.add_argument('--video', required=False,
                         metavar="path or URL to video",
                         help='Video to apply the color splash effect on')
-    parser.add_argument('--epochs', required=True,
+    parser.add_argument('--epochs', required=True, type=int,
                         metavar="num of epochs for training")
     args = parser.parse_args()
 
