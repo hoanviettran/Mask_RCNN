@@ -164,9 +164,11 @@ class BalloonDataset(utils.Dataset):
         # for i, p in enumerate(info["polygons"]):
         p = info["polygons"]
             # Get indexes of pixels inside the polygon and set them to 1
-        rr, cc = skimage.draw.polygon(np.array(p['all_points_y']), np.array(p['all_points_x']))
-        mask[rr, cc, 0] = 1
-
+        try:
+            rr, cc = skimage.draw.polygon(np.array(p['all_points_y']), np.array(p['all_points_x']))
+            mask[rr, cc, 0] = 1
+        except:
+            print(image_id)
         # Return mask, and array of class IDs of each instance. Since we have
         # one class ID only, we return an array of 1s
         return mask.astype(np.bool), np.ones([mask.shape[-1]], dtype=np.int32)
@@ -289,7 +291,7 @@ if __name__ == '__main__':
                         metavar="<command>",
                         help="'train' or 'splash'"
                         )
-    parser.add_argument('--dataset', required=True,
+    parser.add_argument('--dataset', required=False,
                         metavar="/path/to/balloon/dataset/",
                         help='Directory of the Balloon dataset')
                         #default='/home/hoanviettran/cmnd-cancuoc')
@@ -307,7 +309,7 @@ if __name__ == '__main__':
     parser.add_argument('--video', required=False,
                         metavar="path or URL to video",
                         help='Video to apply the color splash effect on')
-    parser.add_argument('--epochs', required=True, type=int,
+    parser.add_argument('--epochs', required=False, type=int,
                         metavar="num of epochs for training")
     args = parser.parse_args()
 
