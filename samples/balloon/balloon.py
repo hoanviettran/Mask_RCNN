@@ -63,7 +63,7 @@ class BalloonConfig(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 1
+    IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + balloon
@@ -73,6 +73,7 @@ class BalloonConfig(Config):
 
     # Skip detections with < 90% confidence
     DETECTION_MIN_CONFIDENCE = 0.9
+
 
 
 ############################################################
@@ -198,7 +199,8 @@ def train(model):
     # no need to train all layers, just the heads should do it.
     print("Training network heads")
     model.train(dataset_train, dataset_val,
-                learning_rate=config.LEARNING_RATE,
+                # learning_rate=config.LEARNING_RATE,
+                learning_rate=args.learning_rate,
                 epochs=args.epochs,
                 layers='heads')
 
@@ -289,7 +291,7 @@ if __name__ == '__main__':
                         metavar="<command>",
                         help="'train' or 'splash'"
                         )
-    parser.add_argument('--dataset', required=True,
+    parser.add_argument('--dataset', required=False,
                         metavar="/path/to/balloon/dataset/",
                         help='Directory of the Balloon dataset')
                         #default='/home/hoanviettran/cmnd-cancuoc')
@@ -307,8 +309,11 @@ if __name__ == '__main__':
     parser.add_argument('--video', required=False,
                         metavar="path or URL to video",
                         help='Video to apply the color splash effect on')
-    parser.add_argument('--epochs', required=True, type=int,
+    parser.add_argument('--epochs', required=False, type=int,
                         metavar="num of epochs for training")
+    parser.add_argument('--learning_rate', required=False, type=float,
+                        metavar="learning_rate training")
+
     args = parser.parse_args()
 
     # Validate arguments
