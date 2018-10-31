@@ -6,3 +6,4 @@ __pycache__/
 .vscode
 *.h5
 .ipynb_checkpoints
+*/.ipynb_checkpoints/*
