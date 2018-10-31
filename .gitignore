@@ -5,5 +5,15 @@ __pycache__/
 **/__pycache__/
 .vscode
 *.h5
+<<<<<<< HEAD
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+=======
+.idea
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+datasets/
+build/
+dist/
+mask_rcnn.egg-info/
+>>>>>>> 581d4f8a8e605e97f577ed3662ff0b0191eb4aac
