@@ -321,9 +321,9 @@ if __name__ == '__main__':
                         metavar="num of epochs for training")
     parser.add_argument('--learning_rate', required=False, type=float,
                         metavar="learning_rate training")
-    parser.add_argument('--momentum', required=False, type=float,
+    parser.add_argument('--momentum', required=False, type=float, default=0.9,
                         metavar="learning momentum training")
-    parser.add_argument('--weight_decay', required=False, type=float,
+    parser.add_argument('--weight_decay', required=False, type=float, default=0.0001,
                         metavar="weight decay training")
 
     args = parser.parse_args()
