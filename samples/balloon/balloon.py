@@ -74,6 +74,12 @@ class BalloonConfig(Config):
     # Skip detections with < 90% confidence
     DETECTION_MIN_CONFIDENCE = 0.9
 
+    def config_hyper_param(self, momentum=0.9, weight_decay=0.0001):
+        
+        self.LEARNING_MOMENTUM = momentum
+        # Weight decay regularization
+        self.WEIGHT_DECAY = weight_decay
+
 
 
 ############################################################
@@ -315,6 +321,10 @@ if __name__ == '__main__':
                         metavar="num of epochs for training")
     parser.add_argument('--learning_rate', required=False, type=float,
                         metavar="learning_rate training")
+    parser.add_argument('--momentum', required=False, type=float,
+                        metavar="learning momentum training")
+    parser.add_argument('--weight_decay', required=False, type=float,
+                        metavar="weight decay training")
 
     args = parser.parse_args()
 
@@ -332,6 +342,7 @@ if __name__ == '__main__':
     # Configurations
     if args.command == "train":
         config = BalloonConfig()
+        config.config_hyper_param(args.momentumm, args.weight_decay)
     else:
         class InferenceConfig(BalloonConfig):
             # Set batch size to 1 since we'll be running inference on
