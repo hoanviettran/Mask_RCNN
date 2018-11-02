@@ -342,7 +342,7 @@ if __name__ == '__main__':
     # Configurations
     if args.command == "train":
         config = BalloonConfig()
-        config.config_hyper_param(args.momentumm, args.weight_decay)
+        config.config_hyper_param(args.momentum, args.weight_decay)
     else:
         class InferenceConfig(BalloonConfig):
             # Set batch size to 1 since we'll be running inference on
